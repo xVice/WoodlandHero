@@ -36,7 +36,7 @@ or get the latest release from the release tab or simply click here [Releases](h
 ## Credits
 
 - [Jupe/Vice]: Game Developer
-- [Game Assets Credit]: Attribution to the creators of any assets used in the game(will be filled when game is finished!).
+- [KenneyNL](https://www.kenney.nl/): All game assets.
 - NG For All Jam: This game was created for the NG For All Jam.
 
 ## Feedback and Bug Reports
