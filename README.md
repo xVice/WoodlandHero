@@ -30,8 +30,8 @@ Embark on a challenging adventure, test your skills, and save the Wood Land from
 1. Clone this repository to your local machine.
 2. Open the project in Unity.
 3. Build and run the game.
-4. Use your mouse to plant trees and block the fire's path.
-5. Strategically manage your money and tree placements to maximize your score.
+
+or get the latest release from the release tab or simply click here [Releases](https://github.com/xVice/WoodlandHero/releases)
 
 ## Credits
 
