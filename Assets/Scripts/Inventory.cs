@@ -49,6 +49,12 @@ public class Inventory : MonoBehaviour
     }
 
 
+    public void RemoveItem(Item item)
+    {
+        items.Remove(item);
+        RenderItemsInInventory();
+    }
+
 
     public void AddItemsWithID(int id = 0, int amount = 1, int usesLeft = 64)
     {
