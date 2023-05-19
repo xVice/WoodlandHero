@@ -4,9 +4,13 @@ Wood Land Hero is a Unity game created for the NG For All Jam gamejam, centered 
 
 ## Gameplay
 
-The objective of Wood Land Hero is to plant different types of trees strategically to create a barrier against the advancing fire. You start with a limited amount of money, which you can use to purchase various tree types from the in-game shop. Each tree type has unique properties and costs, so choose wisely!
+Wood Land Hero is an exciting game where your mission is to combat a devastating forest fire by strategically planting a diverse range of trees while buying and selling trees. To tackle the raging inferno, you must cleverly allocate your limited funds to purchase different tree types and gadgets from the in-game shop, each offering unique properties and varying costs. Choose wisely to maximize your chances of success!
 
-As the fire progresses, you must continuously plant trees to block its path. The fire will consume any unprotected trees, so you need to plan your tree placement carefully. Your score increases based on the number of trees saved from the fire.
+But that's not all. In Wood Land Hero, you possess the power to break trees as well, effectively halting the fire's progression to nearby trees. This ability adds an extra layer of strategy and control to your firefighting efforts.
+
+As the forest fire intensifies, your survival hinges on your continuous planting of trees, forming a resilient barrier to block its destructive path. Unprotected trees fall victim to the voracious flames, underscoring the importance of meticulous tree placement and foresight. Your score in this thrilling game is determined by the number of trees you successfully safeguard from the relentless fire.
+
+Embark on a challenging adventure, test your skills, and save the Wood Land from destruction in Wood Land Hero!
 
 ## Features
 
@@ -18,6 +22,7 @@ As the fire progresses, you must continuously plant trees to block its path. The
 
 ## Controls
 
+- WASD Keys: Movement.
 - Mouse click: Plant a tree in the desired location.
 
 ## How to Play
