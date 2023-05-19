@@ -37,6 +37,7 @@ or get the latest release from the release tab or simply click here [Releases](h
 
 - [Jupe/Vice]: Game Developer
 - [KenneyNL](https://www.kenney.nl/): All game assets.
+- [celiohogane](https://celiohogane.itch.io/top-down-tree-assets): Tree assets.
 - NG For All Jam: This game was created for the NG For All Jam.
 
 ## Feedback and Bug Reports
