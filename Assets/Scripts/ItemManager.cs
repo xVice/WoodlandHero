@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    private List<Item> items = new List<Item>();
+    public List<Item> items = new List<Item>();
 
     private void Awake()
     {
@@ -13,8 +14,23 @@ public class ItemManager : MonoBehaviour
 
     void WarmItems()
     {
-        items.Add(new Item(Resources.Load<Sprite>("Sprites/DefaultItem"), 0, "TestItem", "Lorem Ipsum Dolor Sit Amet Constitutor käse"));
+        int itemId = 0;
+
+        foreach (TreeType treeType in Enum.GetValues(typeof(TreeType)))
+        {
+            string treeTypeName = treeType.ToString();
+            string seedName = treeTypeName + " Seed";
+            string description = "A simple " + treeTypeName.ToLower() + " seed, you might find some in your local forest!";
+
+            Item seedToAdd = new Item(Resources.Load<Sprite>("Sprites/DefaultItem"), itemId, seedName, description);
+            seedToAdd.data.AddData("type", treeType);
+
+            items.Add(seedToAdd);
+
+            itemId++;
+        }
     }
+
 
 
     public Item GetItemByID(int id = 0)

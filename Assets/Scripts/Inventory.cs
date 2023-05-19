@@ -7,6 +7,8 @@ public class Inventory : MonoBehaviour
     public GameObject InventoryHolder;
     public GameObject UiItemPrefab;
 
+    public Item selectedItem;
+
     public List<Item> items = new List<Item>();
 
     GameManager gameManager;
@@ -16,6 +18,12 @@ public class Inventory : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         itemManager = gameManager.ItemManager;
+    }
+
+    public void SetSelectedItem(Item item)
+    {
+        selectedItem = item;
+        //TODO display selected item in bottomleft cornor -> RenderItemInInventory for ref
     }
 
     private void Start()
@@ -45,11 +53,14 @@ public class Inventory : MonoBehaviour
         Item inInvItem = items.Find(x => x.id == referenceItem.id);
         if (inInvItem == null)
         {
-            items.Add(new Item(referenceItem.previewImage, referenceItem.id, referenceItem.name, referenceItem.description, amount, usesLeft));
+            Item itemToAdd = new Item(referenceItem.previewImage, referenceItem.id, referenceItem.name, referenceItem.description, amount, usesLeft);
+            itemToAdd.data = referenceItem.data;
+            items.Add(itemToAdd);
+            
         }
         else
         {
-            inInvItem.ammount += amount;
+            inInvItem.amount += amount;
             inInvItem.usesLeft = usesLeft;
         }
         RenderItemsInInventory();
