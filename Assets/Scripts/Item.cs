@@ -1,10 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class ItemData
 {
-    public Dictionary<string, object> data = new Dictionary<string, object>();
+    private Dictionary<string, object> data = new Dictionary<string, object>();
+    private MonoBehaviour context;
+
+    public ItemData(MonoBehaviour context)
+    {
+        this.context = context;
+    }
+
+    public void SetContext(MonoBehaviour context)
+    {
+        this.context = context;
+    }
 
     public void AddData(string key, object value)
     {
@@ -30,6 +40,8 @@ public class ItemData
         else
         {
             Debug.LogError($"Data with key '{key}' does not exist.");
+            Debug.LogError($"The type that wasn't found is: {typeof(T)}");
+            Debug.LogError($"The file that couldn't find the data is '{context.gameObject.name}'.");
         }
 
         return default(T);
@@ -49,6 +61,7 @@ public class ItemData
     }
 }
 
+
 public class Item
 {
     public int id = 0;
@@ -57,9 +70,9 @@ public class Item
     public Sprite previewImage = Resources.Load<Sprite>("Sprites/Default");
     public int amount = 1;
     public int usesLeft = 1;
-    public ItemData data = new ItemData();
+    public ItemData data;
 
-    public Item(Sprite previewImage, int id = 0, string name = "empty", string description = "empty", int amount = 1, int usesLeft = 64)
+    public Item(ItemData data, Sprite previewImage, int id = 0, string name = "empty", string description = "empty", int amount = 1, int usesLeft = 64)
     {
         this.id = id;
         this.name = name;
@@ -67,9 +80,10 @@ public class Item
         this.amount = amount;
         this.usesLeft = usesLeft;
         this.previewImage = previewImage;
+        this.data = data;
     }
 
-    public Item()
+    public Item(ItemData data)
     {
         this.id = 0;
         this.name = "empty";
@@ -77,5 +91,6 @@ public class Item
         this.amount = 0;
         this.usesLeft = 0;
         this.previewImage = Resources.Load<Sprite>("Sprites/Default");
+        this.data = data;
     }
 }

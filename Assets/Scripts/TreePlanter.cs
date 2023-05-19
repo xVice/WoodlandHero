@@ -31,7 +31,7 @@ public class TreePlanter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // Check for left mouse button click
+        if (Input.GetMouseButtonDown(0) & Inventory.selectedItem != null && Inventory.selectedItem.data.ContainsData("isSeed")) // Check for left mouse button click
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
@@ -48,11 +48,11 @@ public class TreePlanter : MonoBehaviour
 
                     float distance = Vector2.Distance(playerPosition, clickPosition);
 
-                    if (distance <= placeRange) // Replace 'yourRange' with the desired range value
+                    if (distance <= placeRange)
                     {
                         Debug.Log("Is in place range");
                         Tree tree = Instantiate(TreePrefab, clickPosition, Quaternion.identity).GetComponent<Tree>();
-                        tree.SetupTree(GameManager.Inventory.selectedItem.data.GetData<TreeType>("type"));
+                        tree.SetupTree(GameManager.Inventory.selectedItem.data.GetData<TreeType>("type"), Inventory.selectedItem);
                     }
                 }
             }

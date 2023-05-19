@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,27 +16,41 @@ public class Tree : MonoBehaviour, ITickable
     private Vector3 initialScale;
     private Vector3 targetScale;
     private bool isGrowing = false;
+    private bool isGrown = false;
 
-    GameManager GameManager;
+    GameManager gameManager;
+    Item item;
 
     private void Awake()
     {
-        GameManager = FindAnyObjectByType<GameManager>();
+        gameManager = FindAnyObjectByType<GameManager>();
         initialScale = transform.localScale;
         targetScale = initialScale * 10f; // Increase the scale to twice the initial size
     }
 
-    public void SetupTree(TreeType type)
+    public void SetupTree(TreeType type, Item item)
     {
         this.type = type;
+        this.item = item;
         // Retrieve tree properties based on the tree type
-        TreeProperties properties = GameManager.TreeProperties[type];
+        TreeProperties properties = gameManager.TreeProperties[type];
         moneyReward = properties.moneyReward;
         tickToGrow = properties.tickToGrow;
         Debug.Log($"Tree is now a {type}, and rewards {moneyReward} coins, grow time is {tickToGrow} ticks");
 
         // Start growing the tree
         StartGrowing();
+    }
+
+    public void HarvestTree()
+    {
+        if (isGrown)
+        {
+            isGrown = false;
+            gameManager.Inventory.AddItemsWithID(gameManager.ItemManager.GetWoodTypeTuple(type).Item2.id, 3);
+            gameManager.MoneyManager.AddCoins(moneyReward);
+            Destroy(gameObject);
+        }
     }
 
     public void Tick()
@@ -53,6 +68,7 @@ public class Tree : MonoBehaviour, ITickable
             {
                 Debug.Log("Tree fully grown");
                 isGrowing = false;
+                isGrown = true;
             }
         }
     }

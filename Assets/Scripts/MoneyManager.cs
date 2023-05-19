@@ -10,6 +10,7 @@ public class MoneyManager : MonoBehaviour
     public void AddCoins(int amount)
     {
         coins += amount;
+        Debug.Log($"Added {amount} coins, new total is {coins}!");
     }
 
     // Remove a specific amount of coins
@@ -20,6 +21,7 @@ public class MoneyManager : MonoBehaviour
         {
             coins = 0;
         }
+        Debug.Log($"Removed {amount} coins, new total is {coins}!");
     }
 
     // Get the current number of coins

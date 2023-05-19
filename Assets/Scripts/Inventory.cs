@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,19 +48,23 @@ public class Inventory : MonoBehaviour
         }
     }
 
+
+
     public void AddItemsWithID(int id = 0, int amount = 1, int usesLeft = 64)
     {
         Item referenceItem = itemManager.GetItemByID(id);
-        Item inInvItem = items.Find(x => x.id == referenceItem.id);
-        if (inInvItem == null)
+
+        if (items.Find(x => x.id == referenceItem.id) == null)
         {
-            Item itemToAdd = new Item(referenceItem.previewImage, referenceItem.id, referenceItem.name, referenceItem.description, amount, usesLeft);
+            Item itemToAdd = new Item(new ItemData(this),referenceItem.previewImage, referenceItem.id, referenceItem.name, referenceItem.description, amount, usesLeft);
+            referenceItem.data.SetContext(this);
             itemToAdd.data = referenceItem.data;
             items.Add(itemToAdd);
             
         }
         else
         {
+            Item inInvItem = items.Find(x => x.id == referenceItem.id);
             inInvItem.amount += amount;
             inInvItem.usesLeft = usesLeft;
         }
@@ -75,6 +80,6 @@ public class Inventory : MonoBehaviour
     public Item GetItem(int id)
     {
         Item inInvItem = items.Find(x => x.id == id);
-        return inInvItem ?? new Item();
+        return inInvItem ?? new Item(new ItemData(this));
     }
 }
