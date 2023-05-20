@@ -15,21 +15,37 @@ public class Inventory : MonoBehaviour
     GameManager gameManager;
     ItemManager itemManager;
 
+    bool invIsOpen = false;
+
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
         itemManager = gameManager.ItemManager;
+        Item selectedItem = AddItemsWithID(2, 5, 64);
+        this.selectedItem = selectedItem;
+    }
+
+    private void Update()
+    {
+        // Check for Tab key press to close the inventory
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            invIsOpen = !invIsOpen;
+        }
+
+        DisplayInventory();
+    }
+
+    private void DisplayInventory()
+    {
+        // Hide the inventory UI or perform any necessary actions to close the inventory
+        //InventoryHolder.SetActive(invIsOpen);
     }
 
     public void SetSelectedItem(Item item)
     {
         selectedItem = item;
-        //TODO display selected item in bottomleft cornor -> RenderItemInInventory for ref
-    }
-
-    private void Start()
-    {
-        AddItemsWithID(0, 5, 64);
+        // TODO: Display selected item in the bottom-left corner -> RenderItemInInventory for ref
     }
 
     public void RenderItemsInInventory()
@@ -48,33 +64,33 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
     public void RemoveItem(Item item)
     {
         items.Remove(item);
         RenderItemsInInventory();
     }
 
-
-    public void AddItemsWithID(int id = 0, int amount = 1, int usesLeft = 64)
+    public Item AddItemsWithID(int id = 0, int amount = 1, int usesLeft = 64)
     {
         Item referenceItem = itemManager.GetItemByID(id);
 
         if (items.Find(x => x.id == referenceItem.id) == null)
         {
-            Item itemToAdd = new Item(new ItemData(this),referenceItem.previewImage, referenceItem.id, referenceItem.name, referenceItem.description, amount, usesLeft);
+            Item itemToAdd = new Item(new ItemData(this), referenceItem.previewImage, referenceItem.id, referenceItem.name, referenceItem.description, amount, usesLeft);
             referenceItem.data.SetContext(this);
             itemToAdd.data = referenceItem.data;
             items.Add(itemToAdd);
-            
+            RenderItemsInInventory();
+            return itemToAdd;
         }
         else
         {
             Item inInvItem = items.Find(x => x.id == referenceItem.id);
             inInvItem.amount += amount;
             inInvItem.usesLeft = usesLeft;
+            RenderItemsInInventory();
+            return inInvItem;
         }
-        RenderItemsInInventory();
     }
 
     public bool HasItem(int id)

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
         Inventory = FindObjectOfType<Inventory>();
         MoneyManager = FindObjectOfType<MoneyManager>();
         WarmTreeTypes();
+
     }
 
     private void WarmTreeTypes()

@@ -53,14 +53,17 @@ public class DebugUI : MonoBehaviour
 
             GUILayout.BeginHorizontal();
 
+            GUILayout.Label("Id:");
+            GUILayout.Label(item.id.ToString());
+
             // Field for tweaking the amount
             GUILayout.Label("Amount:");
-            addamount = int.Parse(GUILayout.TextField(item.amount.ToString()));
-
+            addamount = int.Parse(GUILayout.TextField(addamount.ToString()));
+            
             // Field for tweaking the usesLeft
             GUILayout.Label("Uses Left:");
-            usesLeft = int.Parse(GUILayout.TextField(item.usesLeft.ToString()));
-
+            usesLeft = int.Parse(GUILayout.TextField(usesLeft.ToString()));
+            
             GUILayout.EndHorizontal();
 
             GUILayout.EndVertical();
@@ -86,7 +89,7 @@ public class DebugUI : MonoBehaviour
 
     private void AddItemToPlayerInventory(int itemID)
     {
-        GameManager.Inventory.AddItemsWithID(itemID, 1, 64);
+        GameManager.Inventory.AddItemsWithID(itemID, addamount, usesLeft);
         Debug.Log("Adding item to player's inventory: " + itemID);
     }
 }

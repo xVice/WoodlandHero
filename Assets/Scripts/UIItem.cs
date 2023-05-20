@@ -11,6 +11,8 @@ public class UIItem : MonoBehaviour
     public Image displayImage;
     public TextMeshProUGUI ItemNameLabel;
     public TextMeshProUGUI ItemAmountLabel;
+    public TextMeshProUGUI ItemNameLabel2;
+    public TextMeshProUGUI ItemAmountLabel2;
 
     GameManager GameManager;
     Inventory Inventory;
@@ -26,6 +28,8 @@ public class UIItem : MonoBehaviour
         this.item = item;
         ItemNameLabel.text = item.name;
         ItemAmountLabel.text = item.amount.ToString();
+        ItemNameLabel2.text = item.name;
+        ItemAmountLabel2.text = item.amount.ToString();
         displayImage.sprite = item.previewImage;
     }
 

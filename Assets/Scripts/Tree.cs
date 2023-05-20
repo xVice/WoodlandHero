@@ -28,6 +28,12 @@ public class Tree : MonoBehaviour, ITickable
         targetScale = initialScale * 10f; // Increase the scale to twice the initial size
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, transform.localScale.x + 5f);
+    }
+
     public void SetupTree(TreeType type, Item item)
     {
         this.type = type;

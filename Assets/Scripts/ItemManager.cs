@@ -13,11 +13,18 @@ public class ItemManager : MonoBehaviour
         WarmItems();
     }
 
-    void WarmItems()
+    public void WarmItems()
     {
         int itemId = 1;
-        Item rawWood;
-        Item LogWood;
+
+        Item itemToAdd = new Item(new ItemData(this), Resources.Load<Sprite>("Sprites/DefaultItem"), itemId, "TestTool", "The Debug tool though");
+        itemToAdd.data.AddData("isTool", true);
+        itemToAdd.data.AddData("breakRange", 5f);
+
+        items.Add(itemToAdd);
+
+        itemId++;
+
 
         foreach (TreeType treeType in Enum.GetValues(typeof(TreeType)))
         {
@@ -27,6 +34,8 @@ public class ItemManager : MonoBehaviour
 
             Item seedToAdd = new Item(new ItemData(this),Resources.Load<Sprite>("Sprites/DefaultItem"), itemId, seedName, description);
             seedToAdd.data.AddData("type", treeType);
+            seedToAdd.data.AddData("isBuyable", true);
+            seedToAdd.data.AddData("price", itemId * 3);
             seedToAdd.data.AddData("isSeed", true);
 
             items.Add(seedToAdd);
@@ -42,22 +51,10 @@ public class ItemManager : MonoBehaviour
             logToAdd.data.AddData("sellPrice", itemId * 5);
 
             items.Add(logToAdd);
+            treeTypes.Add(new Tuple<Item, Item>(seedToAdd, logToAdd));
 
             itemId++;
-
-            treeTypes.Add(new Tuple<Item, Item>(seedToAdd, logToAdd));
         }
-
-        foreach (TreeType treeType in Enum.GetValues(typeof(TreeType)))
-        {
-
-        }
-
-        Item itemToAdd = new Item(new ItemData(this), Resources.Load<Sprite>("Sprites/DefaultItem"), itemId, "TestTool", "The Debug tool though");
-        itemToAdd.data.AddData("isTool", true);
-        itemToAdd.data.AddData("breakRange", 5f);
-
-        items.Add(itemToAdd);
     }
 
     public Tuple<Item,Item> GetWoodTypeTuple(TreeType type)
@@ -72,6 +69,23 @@ public class ItemManager : MonoBehaviour
             return tuple;
         }
         throw new Exception("WoodTypeNotFound");
+    }
+
+    public List<Item> ItemsWithData<T>(string key)
+    {
+        List<Item> dataItems = new List<Item>();
+        foreach(Item item in items)
+        {
+            if(item.data.ContainsData(key) && item.data.GetData<T>(key) != null)
+            {
+                dataItems.Add(item);
+            }
+        }
+        if(dataItems.Count != 0)
+        {
+            return dataItems;
+        }
+        return null;
     }
 
 

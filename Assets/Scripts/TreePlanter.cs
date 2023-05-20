@@ -29,9 +29,10 @@ public class TreePlanter : MonoBehaviour
     }
 
     // Update is called once per frame
+    // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) & Inventory.selectedItem != null && Inventory.selectedItem.data.ContainsData("isSeed") && Inventory.selectedItem.amount < 0) // Check for left mouse button click
+        if (Input.GetMouseButtonDown(0) && Inventory.selectedItem != null && Inventory.selectedItem.data.ContainsData("isSeed") && Inventory.selectedItem.amount > 0) // Check for left mouse button click
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
@@ -54,7 +55,7 @@ public class TreePlanter : MonoBehaviour
                         Tree tree = Instantiate(TreePrefab, clickPosition, Quaternion.identity).GetComponent<Tree>();
                         tree.SetupTree(GameManager.Inventory.selectedItem.data.GetData<TreeType>("type"), Inventory.selectedItem);
                         Inventory.selectedItem.amount--;
-                        if(Inventory.selectedItem.amount >= 0)
+                        if (Inventory.selectedItem.amount >= 0)
                         {
                             Inventory.RemoveItem(Inventory.selectedItem);
                         }

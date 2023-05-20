@@ -36,8 +36,9 @@ or get the latest release from the release tab or simply click here [Releases](h
 ## Credits
 
 - [Jupe/Vice]: Game Developer
-- [KenneyNL](https://www.kenney.nl/): All game assets.
+- [KenneyNL](https://www.kenney.nl/): A bunch of game assets.
 - [celiohogane](https://celiohogane.itch.io/top-down-tree-assets): Tree assets.
+- [LimeZU](https://limezu.itch.io/): Even more assets.
 - NG For All Jam: This game was created for the NG For All Jam.
 
 ## Feedback and Bug Reports
@@ -45,3 +46,5 @@ or get the latest release from the release tab or simply click here [Releases](h
 If you encounter any issues while playing the game or have suggestions for improvement, please submit them to the [Issues](https://github.com/xVice/WoodlandHero/issues) section of this repository.
 
 We hope you enjoy playing Wood Land Hero and that it inspires you to appreciate and protect our natural environment!
+
+Press F8 if you want to cheat!
