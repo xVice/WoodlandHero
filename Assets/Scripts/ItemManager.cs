@@ -20,11 +20,20 @@ public class ItemManager : MonoBehaviour
 
         int itemId = 1;
 
-        Item itemToAdd = new Item(new ItemData(this), Resources.Load<Sprite>("Sprites/DefaultItem"), itemId, "TestTool", "The Debug tool though");
+        Item itemToAdd = CreateItem(itemId, "Sprites/DefaultItem", "Simple Axe", "A Simple axe, its not that good.", new ItemData(this));
         itemToAdd.data.AddData("isTool", true);
         itemToAdd.data.AddData("breakRange", 5f);
 
         items.Add(itemToAdd);
+
+        itemId++;
+
+        Item fireExting = CreateItem(itemId, "Sprites/DefaultItem", "Fire extinguisher", "Its a fire extinguisher.", new ItemData(this));
+        fireExting.data.AddData("usesLeft", 120);
+        fireExting.data.AddData("isBuyable", true);
+        fireExting.data.AddData("price", 20);
+
+        items.Add(fireExting);
 
         itemId++;
 
@@ -36,7 +45,7 @@ public class ItemManager : MonoBehaviour
             string description = "A simple " + treeTypeName.ToLower() + " seed, you might find some in your local forest!";
 
             Debug.Log($"Sprites/Trees/{treeTypeName}");
-            Item seedToAdd = new Item(new ItemData(this),Resources.Load<Sprite>($"Sprites/Trees/{treeTypeName}"), itemId, seedName, description);
+            Item seedToAdd = new Item(new ItemData(this), Resources.Load<Sprite>($"Sprites/Trees/{treeTypeName}"), itemId, seedName, description);
             seedToAdd.data.AddData("type", treeType);
             seedToAdd.data.AddData("isBuyable", true);
             seedToAdd.data.AddData("price", itemId * 3); // what am i even doing?
@@ -59,6 +68,13 @@ public class ItemManager : MonoBehaviour
 
             itemId++;
         }
+    }
+
+    private Item CreateItem(int itemId, string resourcePath, string name, string desc, ItemData itemData)
+    {
+        Item itemToAdd = new Item(new ItemData(this), Resources.Load<Sprite>("Sprites/DefaultItem"), itemId, "TestTool", "The Debug tool though");
+        itemToAdd.data = itemData;
+        return itemToAdd;
     }
 
     public Tuple<Item,Item> GetWoodTypeTuple(TreeType type)

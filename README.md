@@ -43,6 +43,7 @@ or get the latest release from the release tab or simply click here [Releases](h
 - [LimeZU](https://limezu.itch.io/): Even more assets.
 - [ninjikin](https://ninjikin.itch.io/trees): Trees.
 - [admurin](https://admurin.itch.io/): Even more trees.
+- [HungNguyenVFX](https://assetstore.unity.com/packages/vfx/particles/stylized-fire-vfx-199626): Fire Particles.
 - [ChatGPT]: A little bit of Code.
 - NG For All Jam: This game was created for the NG For All Jam.
 

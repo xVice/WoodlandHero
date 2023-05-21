@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject Player;
+    public GameObject bars;
+    public GameObject FireAlertHolder;
+
     public ItemManager ItemManager;
     public Inventory Inventory;
     public MoneyManager MoneyManager;
     public Shop Shop;
     public SignUI Sign;
     public Dictionary<TreeType, TreeProperties> TreeProperties;
+    public AudioSource audio;
     // Start is called before the first frame update
     void Awake()
     {
+        audio = FindObjectOfType<AudioSource>();
         ItemManager = FindObjectOfType<ItemManager>();
         Inventory = FindObjectOfType<Inventory>();
         MoneyManager = FindObjectOfType<MoneyManager>();
@@ -20,6 +26,21 @@ public class GameManager : MonoBehaviour
         Sign = FindObjectOfType<SignUI>();
         WarmTreeTypes();
 
+    }
+
+    public void PlaySound(string name)
+    {
+        audio.PlayOneShot(Resources.Load<AudioClip>($"Sounds/{name}"));
+    }
+
+    public void SetFireAlert(bool state)
+    {
+        FireAlertHolder.SetActive(state);
+    }
+
+    public void ToggleBars(bool state)
+    {
+        bars.SetActive(state);
     }
 
     public void DisplaySign(string text)
