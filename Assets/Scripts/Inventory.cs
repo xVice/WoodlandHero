@@ -6,6 +6,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public GameObject InventoryHolder;
+    public GameObject InventoryHolderUIItems;
     public GameObject UiItemPrefab;
 
     public Item selectedItem;
@@ -21,8 +22,10 @@ public class Inventory : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         itemManager = gameManager.ItemManager;
-        Item selectedItem = AddItemsWithID(2, 5, 64);
+        itemManager.WarmItems();
+        Item selectedItem = AddItemsWithID(1, 1, 64);
         this.selectedItem = selectedItem;
+        AddItemsWithID(2, 5);
     }
 
     private void Update()
@@ -31,15 +34,20 @@ public class Inventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             invIsOpen = !invIsOpen;
+            DisplayInventory();
         }
 
-        DisplayInventory();
+
     }
 
     private void DisplayInventory()
     {
         // Hide the inventory UI or perform any necessary actions to close the inventory
-        //InventoryHolder.SetActive(invIsOpen);
+        InventoryHolder.SetActive(invIsOpen);
+        if (invIsOpen)
+        {
+            RenderItemsInInventory();
+        }
     }
 
     public void SetSelectedItem(Item item)
@@ -50,17 +58,20 @@ public class Inventory : MonoBehaviour
 
     public void RenderItemsInInventory()
     {
-        UIItem[] uiitems = InventoryHolder.GetComponentsInChildren<UIItem>();
-
-        foreach (UIItem item in uiitems)
+        if (InventoryHolder.activeInHierarchy)
         {
-            Destroy(item.gameObject);
-        }
+            UIItem[] uiitems = InventoryHolderUIItems.GetComponentsInChildren<UIItem>();
 
-        foreach (Item item in items)
-        {
-            UIItem uiitem = Instantiate(UiItemPrefab, InventoryHolder.transform).GetComponent<UIItem>();
-            uiitem.SetItem(item);
+            foreach (UIItem item in uiitems)
+            {
+                Destroy(item.gameObject);
+            }
+
+            foreach (Item item in items)
+            {
+                UIItem uiitem = Instantiate(UiItemPrefab, InventoryHolderUIItems.transform).GetComponent<UIItem>();
+                uiitem.SetItem(item);
+            }
         }
     }
 

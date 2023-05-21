@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public ItemManager ItemManager;
     public Inventory Inventory;
     public MoneyManager MoneyManager;
+    public Shop Shop;
+    public SignUI Sign;
     public Dictionary<TreeType, TreeProperties> TreeProperties;
     // Start is called before the first frame update
     void Awake()
@@ -14,8 +16,16 @@ public class GameManager : MonoBehaviour
         ItemManager = FindObjectOfType<ItemManager>();
         Inventory = FindObjectOfType<Inventory>();
         MoneyManager = FindObjectOfType<MoneyManager>();
+        Shop = FindObjectOfType<Shop>();
+        Sign = FindObjectOfType<SignUI>();
         WarmTreeTypes();
 
+    }
+
+    public void DisplaySign(string text)
+    {
+        Sign.gameObject.SetActive(true);
+        Sign.DisplaySign(text);
     }
 
     private void WarmTreeTypes()

@@ -55,10 +55,11 @@ public class TreePlanter : MonoBehaviour
                         Tree tree = Instantiate(TreePrefab, clickPosition, Quaternion.identity).GetComponent<Tree>();
                         tree.SetupTree(GameManager.Inventory.selectedItem.data.GetData<TreeType>("type"), Inventory.selectedItem);
                         Inventory.selectedItem.amount--;
-                        if (Inventory.selectedItem.amount >= 0)
+                        if (Inventory.selectedItem.amount <= 0)
                         {
                             Inventory.RemoveItem(Inventory.selectedItem);
                         }
+                        Inventory.RenderItemsInInventory();
                     }
                 }
             }

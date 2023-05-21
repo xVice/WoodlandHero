@@ -39,6 +39,9 @@ or get the latest release from the release tab or simply click here [Releases](h
 - [KenneyNL](https://www.kenney.nl/): A bunch of game assets.
 - [celiohogane](https://celiohogane.itch.io/top-down-tree-assets): Tree assets.
 - [LimeZU](https://limezu.itch.io/): Even more assets.
+- [ninjikin](https://ninjikin.itch.io/trees): Trees.
+- [admurin](https://admurin.itch.io/): Even more trees.
+- [ChatGPT]: Code.
 - NG For All Jam: This game was created for the NG For All Jam.
 
 ## Feedback and Bug Reports

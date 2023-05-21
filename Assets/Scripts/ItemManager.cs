@@ -15,6 +15,9 @@ public class ItemManager : MonoBehaviour
 
     public void WarmItems()
     {
+        items.Clear();
+        treeTypes.Clear();
+
         int itemId = 1;
 
         Item itemToAdd = new Item(new ItemData(this), Resources.Load<Sprite>("Sprites/DefaultItem"), itemId, "TestTool", "The Debug tool though");
@@ -32,10 +35,11 @@ public class ItemManager : MonoBehaviour
             string seedName = treeTypeName + " Seed";
             string description = "A simple " + treeTypeName.ToLower() + " seed, you might find some in your local forest!";
 
-            Item seedToAdd = new Item(new ItemData(this),Resources.Load<Sprite>("Sprites/DefaultItem"), itemId, seedName, description);
+            Debug.Log($"Sprites/Trees/{treeTypeName}");
+            Item seedToAdd = new Item(new ItemData(this),Resources.Load<Sprite>($"Sprites/Trees/{treeTypeName}"), itemId, seedName, description);
             seedToAdd.data.AddData("type", treeType);
             seedToAdd.data.AddData("isBuyable", true);
-            seedToAdd.data.AddData("price", itemId * 3);
+            seedToAdd.data.AddData("price", itemId * 3); // what am i even doing?
             seedToAdd.data.AddData("isSeed", true);
 
             items.Add(seedToAdd);

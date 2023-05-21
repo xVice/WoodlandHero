@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoneyManager : MonoBehaviour
 {
-    private int coins = 0;
+    private int coins = 25;
 
     // Add a specific amount of coins
     public void AddCoins(int amount)
