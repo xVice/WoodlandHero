@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FireExtinguiser : MonoBehaviour
 {
+    public GameObject fireExtinguisherParticlesHolder;
+    public ParticleSystem fireExitinguisherParticles;
 
     GameManager gameManager;
 
@@ -22,22 +24,30 @@ public class FireExtinguiser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.Inventory.selectedItem != null)
+        if (Input.GetMouseButton(0) && gameManager.Inventory.selectedItem != null)
         {
             Item selectedItem = gameManager.Inventory.selectedItem;
-            if (selectedItem.name == "Fire extinguisher")
+            if (selectedItem.name == "Extinguisher")
             {
                 int usesLeft = selectedItem.data.GetData<int>("usesLeft");
                 if (usesLeft > 0)
                 {
                     usesLeft--;
+                    selectedItem.data.AddData("usesLeft", usesLeft);
+                    Debug.Log(usesLeft);
 
-                    // Cast a ray from player to mouse position
-                    Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    Vector2 playerPosition = gameManager.Player.transform.position;
-                    Vector2 direction = mousePosition - playerPosition;
+                    if (!fireExitinguisherParticles.isPlaying)
+                    {
+                        fireExitinguisherParticles.Play();
+                    }
 
-                    RaycastHit2D[] hits = Physics2D.RaycastAll(playerPosition, direction);
+                    Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    Vector3 direction = mousePosition - transform.position;
+                    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                    Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                    fireExtinguisherParticlesHolder.transform.rotation = rotation;
+
+                    RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction);
 
                     foreach (RaycastHit2D hit in hits)
                     {
@@ -50,8 +60,27 @@ public class FireExtinguiser : MonoBehaviour
                         }
                     }
                 }
+                else
+                {
+                    selectedItem.amount--;
+                    if (selectedItem.amount <= 0)
+                    {
+                        gameManager.Inventory.RemoveItem(selectedItem);
+                    }
+                    else
+                    {
+                        selectedItem.data.AddData("usesLeft", 120);
+                    }
+                    gameManager.Inventory.RenderItemsInInventory();
+                    fireExitinguisherParticles.Stop();
+                }
             }
         }
+        else
+        {
+            fireExitinguisherParticles.Stop();
+        }
+
     }
 
 }

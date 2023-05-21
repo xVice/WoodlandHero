@@ -27,8 +27,9 @@ public class TreeHavester : MonoBehaviour
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
             Debug.Log("Mouse Clicked tool");
+            
 
-            if (hit.collider != null)
+            if (hit.collider != null && Inventory.selectedItem.data.GetData<int>("usesLeft") >= 0)
             {
                 Debug.Log($"{hit.transform.gameObject.tag}");
                 if (Inventory.selectedItem != null & hit.transform.gameObject.CompareTag("Tree")) // Check if the clicked object is the TreePlanter
@@ -47,6 +48,16 @@ public class TreeHavester : MonoBehaviour
 
                     }
                 }
+            }
+            else if (Inventory.selectedItem.data.GetData<int>("usesLeft") <= 0)
+            {
+                Inventory.selectedItem.data.AddData("usesLeft", 20);
+                Inventory.selectedItem.amount--;
+                if (Inventory.selectedItem.amount >= 0)
+                {
+                    Inventory.RemoveItem(Inventory.selectedItem);
+                }
+
             }
         }
     }

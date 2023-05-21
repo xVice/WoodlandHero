@@ -149,8 +149,8 @@ public class Tree : MonoBehaviour, ITickable
         }
         else
         {
-            flameParticles.Pause();
-            audio.Pause();
+            flameParticles.Stop();
+            audio.Stop();
         }
 
         if (isGrowing)

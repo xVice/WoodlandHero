@@ -44,8 +44,11 @@ or get the latest release from the release tab or simply click here [Releases](h
 - [ninjikin](https://ninjikin.itch.io/trees): Trees.
 - [admurin](https://admurin.itch.io/): Even more trees.
 - [HungNguyenVFX](https://assetstore.unity.com/packages/vfx/particles/stylized-fire-vfx-199626): Fire Particles.
+- [OlleJackson](https://steamcommunity.com/id/xSYJL1337/): Cropping assets / Phone and Plane asset.
+- [OlleJuber](https://steamcommunity.com/id/xflixx1337/): Cropping assets.
+- [OlleVitalii](https://steamcommunity.com/profiles/76561199163340695/): Cropping assets / Fire Extinguisher asset.
 - [ChatGPT]: A little bit of Code.
-- NG For All Jam: This game was created for the NG For All Jam.
+- [NordicGames]: This game was created for the NG For All Jam.
 
 ## Feedback and Bug Reports
 

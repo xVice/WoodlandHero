@@ -28,42 +28,31 @@ public class DebugUI : MonoBehaviour
 
     private void DrawInventoryWindow(int windowID)
     {
-        // Begin a scroll view
         scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(480), GUILayout.Height(400));
 
-        // Display your inventory items here using ImGui
         foreach (Item item in GameManager.ItemManager.items)
         {
             GUILayout.BeginHorizontal();
-
-            // Display the preview image as a sprite
             GUILayout.Box(item.previewImage.texture, GUILayout.Width(50), GUILayout.Height(50));
-
             GUILayout.BeginVertical();
-
-
 
             if (GUILayout.Button(item.name))
             {
-                // Add the clicked item to the player's inventory
                 GameManager.Inventory.AddItemsWithID(item.id, addamount, usesLeft);
             }
 
             GUILayout.Label(item.description);
 
             GUILayout.BeginHorizontal();
-
             GUILayout.Label("Id:");
             GUILayout.Label(item.id.ToString());
 
-            // Field for tweaking the amount
             GUILayout.Label("Amount:");
             addamount = int.Parse(GUILayout.TextField(addamount.ToString()));
-            
-            // Field for tweaking the usesLeft
+
             GUILayout.Label("Uses Left:");
             usesLeft = int.Parse(GUILayout.TextField(usesLeft.ToString()));
-            
+
             GUILayout.EndHorizontal();
 
             GUILayout.EndVertical();
@@ -72,12 +61,11 @@ public class DebugUI : MonoBehaviour
             GUILayout.Space(10);
         }
 
-        // End the scroll view
         GUILayout.EndScrollView();
 
-        // Make the window draggable
         GUI.DragWindow();
     }
+
 
     private void Update()
     {

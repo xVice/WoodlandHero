@@ -25,7 +25,8 @@ public class Inventory : MonoBehaviour
         itemManager.WarmItems();
         Item selectedItem = AddItemsWithID(1, 1, 64);
         this.selectedItem = selectedItem;
-        AddItemsWithID(2, 5);
+        AddItemsWithID(2, 2);
+        AddItemsWithID(3, 5);
     }
 
     private void Update()
@@ -38,6 +39,11 @@ public class Inventory : MonoBehaviour
         }
 
 
+    }
+
+    private void Start()
+    {
+        DisplayInventory();
     }
 
     private void DisplayInventory()
@@ -78,6 +84,7 @@ public class Inventory : MonoBehaviour
     public void RemoveItem(Item item)
     {
         items.Remove(item);
+        selectedItem = items[0];
         RenderItemsInInventory();
     }
 

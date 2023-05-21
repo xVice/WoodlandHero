@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ItemManager : MonoBehaviour
@@ -20,7 +21,8 @@ public class ItemManager : MonoBehaviour
 
         int itemId = 1;
 
-        Item itemToAdd = CreateItem(itemId, "Sprites/DefaultItem", "Simple Axe", "A Simple axe, its not that good.", new ItemData(this));
+        Item itemToAdd = CreateItem(itemId, "Sprites/Items/Axe1", "Simple Axe", "A Simple axe, its not that good.", new ItemData(this));
+        itemToAdd.data.AddData("usesLeft", 20);
         itemToAdd.data.AddData("isTool", true);
         itemToAdd.data.AddData("breakRange", 5f);
 
@@ -28,7 +30,7 @@ public class ItemManager : MonoBehaviour
 
         itemId++;
 
-        Item fireExting = CreateItem(itemId, "Sprites/DefaultItem", "Fire extinguisher", "Its a fire extinguisher.", new ItemData(this));
+        Item fireExting = CreateItem(itemId, "Sprites/Items/FireExtinguisher", "Extinguisher", "Its a fire extinguisher.", new ItemData(this));
         fireExting.data.AddData("usesLeft", 120);
         fireExting.data.AddData("isBuyable", true);
         fireExting.data.AddData("price", 20);
@@ -48,7 +50,7 @@ public class ItemManager : MonoBehaviour
             Item seedToAdd = new Item(new ItemData(this), Resources.Load<Sprite>($"Sprites/Trees/{treeTypeName}"), itemId, seedName, description);
             seedToAdd.data.AddData("type", treeType);
             seedToAdd.data.AddData("isBuyable", true);
-            seedToAdd.data.AddData("price", itemId * 3); // what am i even doing?
+            seedToAdd.data.AddData("price", itemId * 3); // what am I even doing?
             seedToAdd.data.AddData("isSeed", true);
 
             items.Add(seedToAdd);
@@ -58,22 +60,31 @@ public class ItemManager : MonoBehaviour
             string logName = treeTypeName + " Log";
             string logdescription = $"A simple " + treeTypeName.ToLower() + " piece of wood!";
 
-            Item logToAdd = new Item(new ItemData(this), Resources.Load<Sprite>("Sprites/DefaultItem"), itemId, logName, logdescription);
+            Item logToAdd = new Item(new ItemData(this), Resources.Load<Sprite>($"Sprites/Items/{treeTypeName}Log"), itemId, logName, logdescription);
             logToAdd.data.AddData("type", treeType);
             logToAdd.data.AddData("isLog", true);
-            logToAdd.data.AddData("sellPrice", itemId * 5);
+            logToAdd.data.AddData("sellPrice", itemId * 4);
 
             items.Add(logToAdd);
             treeTypes.Add(new Tuple<Item, Item>(seedToAdd, logToAdd));
 
             itemId++;
         }
+
+        /*
+        Item callFireFighters = CreateItem(itemId, "Sprites/Items/Phone", "Phone.", "Call in a plane that extinguishes fire.", new ItemData(this));
+        callFireFighters.data.AddData("isBuyable", true);
+        callFireFighters.data.AddData("price", 75);
+
+        items.Add(callFireFighters);
+        
+        itemId++;
+        */
     }
 
     private Item CreateItem(int itemId, string resourcePath, string name, string desc, ItemData itemData)
     {
-        Item itemToAdd = new Item(new ItemData(this), Resources.Load<Sprite>("Sprites/DefaultItem"), itemId, "TestTool", "The Debug tool though");
-        itemToAdd.data = itemData;
+        Item itemToAdd = new Item(itemData, Resources.Load<Sprite>(resourcePath), itemId, name, desc);
         return itemToAdd;
     }
 
