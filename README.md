@@ -24,6 +24,8 @@ Embark on a challenging adventure, test your skills, and save the Wood Land from
 
 - WASD Keys: Movement.
 - Mouse click: Plant a tree in the desired location.
+- F Key: Read Sign/Open Shop.
+- E Key: Ride Bus/Enter Building.
 
 ## How to Play
 
