@@ -18,11 +18,12 @@ public class OpenSignInRange : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
     }
 
-    private void OnDrawGizmos()
+    public void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
+        Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, range);
-        Gizmos.DrawWireSphere(transform.position, range + 10f);
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position, range + 0.5f);
     }
 
     // Start is called before the first frame update
@@ -44,7 +45,7 @@ public class OpenSignInRange : MonoBehaviour
                 gameManager.DisplaySign(SignText);
             }
         }
-        else if(sign != null && sign.isActiveAndEnabled && distance <= range + 10f)
+        else if(sign != null && sign.isActiveAndEnabled && distance <= range + 0.5f)
         {
             sign.DisableSign();
         }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -8,6 +9,9 @@ public class GameManager : MonoBehaviour
     public GameObject bars;
     public GameObject FireAlertHolder;
     public GameObject SellModeHolder;
+    public GameObject NotifyHolder;
+    public TextMeshProUGUI NotifyHolderText;
+    public TextMeshProUGUI NotifyHolderTextShadow;
 
 
     public ItemManager ItemManager;
@@ -46,6 +50,16 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void Notify(bool show, string text = "Text")
+    {
+        NotifyHolder.SetActive(show);
+        if (show)
+        {
+            NotifyHolderText.text = text;
+            NotifyHolderTextShadow.text = text;
+        }
+    }
+
     public void ToggleBars(bool state)
     {
         bars.SetActive(state);
@@ -61,11 +75,12 @@ public class GameManager : MonoBehaviour
     {
         TreeProperties = new Dictionary<TreeType, TreeProperties>()
         {
-            { TreeType.Oak, new TreeProperties(30, 750) },
-            { TreeType.Pine, new TreeProperties(35, 1500) },
-            { TreeType.Birch, new TreeProperties(45, 2000) },
-            { TreeType.Cedar, new TreeProperties(50, 2300) },
-            { TreeType.Ash, new TreeProperties(55, 5000) },
+            { TreeType.Oak, new TreeProperties(3, 750) },
+            { TreeType.Pine, new TreeProperties(6, 1500) },
+            { TreeType.Birch, new TreeProperties(11, 2000) },
+            { TreeType.Cedar, new TreeProperties(14, 2300) },
+            { TreeType.Ash, new TreeProperties(19, 5000) },
+            { TreeType.Bamboo, new TreeProperties(24, 350) },
             { TreeType.Spruce, new TreeProperties(75, 7000) },
             { TreeType.Sycamore, new TreeProperties(90, 8500) },
             { TreeType.Cherry, new TreeProperties(95, 9000) },

@@ -10,8 +10,16 @@ public class GotoOtherArea : MonoBehaviour
     public float interactionDistance = 5f;
     public Animator barsAnimator;
     public CinemachineVirtualCamera cinemachineCamera;
+    public string notifyText = "Press E to goto ";
+
+    GameManager gameManager;
 
     private bool isTransitioning = false;
+
+    private void Awake()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
 
     private void OnDrawGizmos()
     {
@@ -30,17 +38,24 @@ public class GotoOtherArea : MonoBehaviour
 
         if (distance <= interactionDistance && !isTransitioning)
         {
+
+            gameManager.Notify(true, notifyText);
             if (Input.GetKeyDown(KeyCode.E))
             {
+                gameManager.Notify(false);
                 StartCoroutine(TransitionToTarget());
             }
+        }
+        else if (distance <= interactionDistance + 0.5f)
+        {
+            gameManager.Notify(false);
         }
     }
 
     IEnumerator TransitionToTarget()
     {
         isTransitioning = true;
-
+        
 
         // Trigger the closing animation
         barsAnimator.SetTrigger("Close");

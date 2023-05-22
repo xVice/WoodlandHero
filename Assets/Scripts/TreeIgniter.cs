@@ -9,7 +9,7 @@ public class TreeIgniter : MonoBehaviour, ITickable
     public GameObject Player;
     public float ignitionRange = 100f;
     public int currentTick = 0;
-    public int ignitionRate = 12000;
+    public int ignitionRate = 5000;
 
     GameManager gameManager;
 
@@ -35,6 +35,7 @@ public class TreeIgniter : MonoBehaviour, ITickable
 
                     // Call the Ignite function on the random tree
                     randomTree.Ignite();
+                    ignitionRate = Random.Range(1000, 10000);
                 }
                 else
                 {
