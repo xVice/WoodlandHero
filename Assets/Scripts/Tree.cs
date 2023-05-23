@@ -61,7 +61,6 @@ public class Tree : MonoBehaviour, ITickable
         tickToGrow = properties.tickToGrow;
         SpriteRenderer sp = gameObject.GetComponent<SpriteRenderer>();
         sp.sprite = item.previewImage;
-        sp.sortingOrder = (int)transform.position.y;
         Debug.Log($"Tree is now a {type}, and rewards {moneyReward} coins, grow time is {tickToGrow} ticks");
 
         // Start growing the tree
